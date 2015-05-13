@@ -20,6 +20,23 @@ class CookieCsrfServiceProvider extends ServiceProvider {
     {
         $this->package('hardywen/cookie-csrf');
 
+        $config = $this->app->config->get('cookie-csrf::config');
+
+        //根据config配置哪些route及提交方法需要调用cookie-csrf
+        $this->app->router->when($config['route'], 'cookie-csrf', $config['method']);
+
+        //将csrf token 放进 cookie里
+        \Cookie::queue('cookie_csrf_token',csrf_token());
+
+    }
+
+	/**
+	 * Register the service provider.
+	 *
+	 * @return void
+	 */
+	public function register()
+	{
         $app = $this->app;
 
         //创建 cookie-csrf filter
@@ -34,25 +51,6 @@ class CookieCsrfServiceProvider extends ServiceProvider {
             \Session::regenerateToken();//token用过一次后就重新生成，防止表单重复提交
 
         });
-
-    }
-
-	/**
-	 * Register the service provider.
-	 *
-	 * @return void
-	 */
-	public function register()
-	{
-        $app = $this->app;
-
-        $config = $app['config']->get('cookie-csrf::config');
-
-        //根据config配置哪些route及提交方法需要调用cookie-csrf
-        $app->router->when($config['route'], 'cookie-csrf', $config['method']);
-
-        //将csrf token 放进 cookie里
-        \Cookie::queue('cookie_csrf_token',csrf_token());
 	}
 
 	/**
