@@ -2,6 +2,7 @@
     "name": "hardywen/cookie-csrf",
     "keywords": ["PHP","laravel","Laravel 4", "csrf","multiple submission"],
     "description": "laravel4 自定义filter 用于防止多次提交表单及跨域提交表单",
+    "license": "MIT",
     "authors": [
         {
             "name": "HardyWen",
