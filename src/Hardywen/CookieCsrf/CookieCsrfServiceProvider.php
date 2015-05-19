@@ -50,8 +50,9 @@ class CookieCsrfServiceProvider extends ServiceProvider
                 if (\Session::token() !== \Cookie::get('cookie_csrf_token')) {
                     throw new \Illuminate\Session\TokenMismatchException;
                 }
-
-                \Session::regenerateToken();//token用过一次后就重新生成，防止表单重复提交
+                if(!$this->app->request->wantsJson()){
+                    \Session::regenerateToken();//token用过一次后就重新生成，防止表单重复提交
+                }
             }
 
         });
