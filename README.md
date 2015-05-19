@@ -7,7 +7,7 @@
 
 #Install
 
-添加 ``` "hardywen/cookie-csrf": "v0.1" ``` 到 composer.json 里
+添加 ``` "hardywen/cookie-csrf": "v0.2" ``` 到 composer.json 里
 
 运行 ``` composer update ``` 命令安装
 
@@ -15,13 +15,22 @@
 #Config
 默认的配置是：
 ```php
-    'route' => '*',
+//路由白名单，pattern通过的就调用此filter,用于设定哪些链接调用
+    'white_list' => array(
+        '*'
+    ),
+
+    //路由黑名单，pattern通过的就【不】调用此filter，用于排除哪些链接调用
+    'black_list' => array(
+        'orders/notify/*' // 支付回调之类的外站调用本站接口链接
+    ),
 
     'method' => array(
         'post',
         'put',
         'delete'
     )
+
 ``` 
 即所有路径的 post,put,delete 方法都进行 cookie-csrf 过滤。
 
