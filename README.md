@@ -7,7 +7,7 @@
 
 #Install
 
-添加 ``` "hardywen/cookie-csrf": "v0.2" ``` 到 composer.json 里
+添加 ``` "hardywen/cookie-csrf": "~v0.2" ``` 到 composer.json 里
 
 运行 ``` composer update ``` 命令安装
 
