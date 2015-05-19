@@ -45,7 +45,6 @@ class CookieCsrfServiceProvider extends ServiceProvider
 
             $config = $this->app->config->get('cookie-csrf::config');
 
-            dd($this->match($config['white_list']) , !$this->match($config['black_list']));
             if ($this->match($config['white_list']) && !$this->match($config['black_list'])) {
 
                 if (\Session::token() !== \Cookie::get('cookie_csrf_token')) {
